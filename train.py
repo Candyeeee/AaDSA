@@ -54,8 +54,6 @@ if __name__ == '__main__':
 
     for epoch in range(opt.start_epoch, opt.epoch_num):
         since = time.time()
-        visualizer.reset()
-        current_losses = OrderedDict()
 
         ### Train ###
         trn_loss = train_utils.train_withmask(model, train_loader, optimizer, criterion, epoch, opt.epoch_num)
@@ -72,9 +70,6 @@ if __name__ == '__main__':
         print('Total Time {:.0f}m {:.0f}s'.format(
             time_elapsed // 60, time_elapsed % 60))
 
-
-        if epoch % opt.display_freq == 0:
-            visualizer.display_results(current_predresults, epoch)
 
         # checkpoint
         if epoch % opt.save_epoch_freq == 0 or epoch == last_epoch:
