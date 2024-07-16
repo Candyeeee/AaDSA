@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
 from torchsummary import summary
-from network import SkipDilatedResNet
+from network import GlobalGenerator
 from data.read_data import load_image_data, dsa_dataset_withmask, dsa_dataset
 from options.train_options import TrainOptions
 import train_utils
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     torch.manual_seed(opt.seed + opt.start_epoch)
 
-    model = SkipDilatedResNet.GlobalGenerator(1, 1, ngf=32, n_blocks=3, upsample_type='nearest', skip_connection=True)
+    model = GlobalGenerator(1, 1, ngf=32, n_blocks=3, upsample_type='nearest', skip_connection=True)
 
     if use_cuda:
         model = torch.nn.DataParallel(model).cuda()
